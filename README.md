@@ -1,3 +1,3 @@
 # Swiftject
 
-A description of this package.
+A super simple service provider for use as a SwiftUI `@EnvironmentObject`.
