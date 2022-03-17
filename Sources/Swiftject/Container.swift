@@ -9,6 +9,8 @@ public class Container {
     public var resolver: Resolver {
         DefaultResolver(resolvers: resolvers)
     }
+    
+    public init() {}
 
     public func register<S>(_ type: S.Type, instance: S) {
         resolvers[ObjectIdentifier(type)] = { _ in instance }
