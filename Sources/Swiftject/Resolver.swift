@@ -9,7 +9,7 @@ public protocol Resolver {
     /// - Parameter context: The resolver to resolve dependencies from.
     ///
     /// - Returns: The resolved instance of type ``T``, or ``nil``.
-    func tryResolve<T>(_ type: T.Type, from context: Resolver) -> T?
+    func tryResolveInstance<T>(_ type: T.Type, from context: Resolver) -> T?
 }
 
 extension Resolver {
@@ -21,7 +21,7 @@ extension Resolver {
     ///
     /// - Returns: The resolved instance of type ``T``, or ``nil``.
     public func tryResolve<T>(_ type: T.Type = T.self, from context: Resolver) -> T? {
-        tryResolve(type, from: context)
+        tryResolveInstance(type, from: context)
     }
     
     /// Resolves an instance of the specified type ``T``, or ``nil`` if an
@@ -31,7 +31,7 @@ extension Resolver {
     ///
     /// - Returns: The resolved instance of type ``T``, or ``nil``.
     public func tryResolve<T>(_ type: T.Type = T.self) -> T? {
-        tryResolve(type, from: self)
+        tryResolveInstance(type, from: self)
     }
     
     /// Resolves an instance of the specified type ``T``, or throws a fatal
@@ -42,7 +42,7 @@ extension Resolver {
     ///
     /// - Returns: The resolved instance of type ``T``.
     public func resolve<T>(_ type: T.Type = T.self, from context: Resolver, file: StaticString = #file, line: UInt = #line) -> T {
-        guard let instance = tryResolve(type, from: context) else {
+        guard let instance = tryResolveInstance(type, from: context) else {
             fatalError("Could not resolve an instance of type \(type) at \(file):\(line)")
         }
 
@@ -56,7 +56,7 @@ extension Resolver {
     ///
     /// - Returns: The resolved instance of type ``T``.
     public func resolve<T>(_ type: T.Type = T.self, file: StaticString = #file, line: UInt = #line) -> T {
-        guard let instance = tryResolve(type, from: self) else {
+        guard let instance = tryResolveInstance(type, from: self) else {
             fatalError("Could not resolve an instance of type \(type) at \(file):\(line)")
         }
 

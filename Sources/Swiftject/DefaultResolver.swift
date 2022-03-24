@@ -12,7 +12,7 @@ public struct DefaultResolver: Resolver {
         self.objectWillChange = PassthroughSubject().eraseToAnyPublisher()
     }
 
-    public func tryResolve<T>(_ type: T.Type, from context: Resolver) -> T? {
+    public func tryResolveInstance<T>(_ type: T.Type, from context: Resolver) -> T? {
         if let resolver = resolvers[ObjectIdentifier(type)] {
             return (resolver(context) as! T)
         } else {
