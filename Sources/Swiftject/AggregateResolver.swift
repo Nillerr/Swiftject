@@ -10,9 +10,9 @@ public struct AggregateResolver: Resolver {
         self.resolvers = resolvers
     }
 
-    public func tryResolve<T>(_ type: T.Type) -> T? {
+    public func tryResolve<T>(_ type: T.Type, from context: Resolver) -> T? {
         resolvers.lazy
-            .compactMap { resolver in resolver.tryResolve(type) }
+            .compactMap { resolver in resolver.tryResolve(type, from: context) }
             .first
     }
 }

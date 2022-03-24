@@ -14,7 +14,7 @@ public class CombineResolver: Resolver, ObservableObject {
         self.objectWillChange = _objectWillChange.eraseToAnyPublisher()
     }
 
-    public func tryResolve<T>(_ type: T.Type) -> T? {
-        resolver.tryResolve(type)
+    public func tryResolve<T>(_ type: T.Type, from context: Resolver) -> T? {
+        resolver.tryResolve(type, from: context)
     }
 }
