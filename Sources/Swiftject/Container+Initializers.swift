@@ -1,4 +1,8 @@
 extension Container {
+    public func register<S>(_ type: S.Type, initializer: @escaping () -> S, file: StaticString = #file, line: UInt = #line) {
+        register(type) { (resolver: Resolver) -> S in initializer() }
+    }
+    
     public func register<T1, S>(_ type: S.Type, initializer: @escaping (T1) -> S, file: StaticString = #file, line: UInt = #line) {
         register(type) { initializer($0.resolve(file: file, line: line)) }
     }
