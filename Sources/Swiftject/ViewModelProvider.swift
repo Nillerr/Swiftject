@@ -8,6 +8,8 @@ import SwiftUI
 public class ViewModelProvider<ViewModel: ObservableObject>: ObservableObject {
     private var viewModel: ViewModel?
     private var subscription: AnyCancellable?
+    
+    public init() {}
 
     public func get(orCreate initializer: () -> ViewModel) -> ViewModel {
         if let viewModel = viewModel {
